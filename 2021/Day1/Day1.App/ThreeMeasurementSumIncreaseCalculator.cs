@@ -1,6 +1,6 @@
 ﻿namespace Day1.App
 {
-    public class ThreeMeasurementSumIncreaseCalculator : MeasurementIncreaseCalculator
+    public sealed class ThreeMeasurementSumIncreaseCalculator : MeasurementIncreaseCalculator
     {
         public ThreeMeasurementSumIncreaseCalculator(): base(3)
         {
