@@ -5,12 +5,12 @@ namespace Day1.Tests
 {
     internal class ThreeMeasurementSumIncreaseCalculatorTests
     {
-        private ThreeMeasurementSumIncreaseCalculator depthIncreaseCalculator = null!;
+        private ThreeMeasurementSumIncreaseCalculator threeMeasurementSumIncreaseCalculator = null!;
 
         [SetUp]
         public void SetUp()
         {
-            depthIncreaseCalculator = new ThreeMeasurementSumIncreaseCalculator();
+            threeMeasurementSumIncreaseCalculator = new ThreeMeasurementSumIncreaseCalculator();
         }
 
         [Test]
@@ -18,7 +18,7 @@ namespace Day1.Tests
         {
             var depthMeasurements = new[] { 199, 200, 201 };
 
-            int timesIncreased = depthIncreaseCalculator.Calculate(depthMeasurements);
+            int timesIncreased = threeMeasurementSumIncreaseCalculator.Calculate(depthMeasurements);
 
             Assert.That(timesIncreased, Is.EqualTo(0));
         }
@@ -28,7 +28,7 @@ namespace Day1.Tests
         {
             var depthMeasurements = new[] { 199, 200, 201, 202 };
 
-            int timesIncreased = depthIncreaseCalculator.Calculate(depthMeasurements);
+            int timesIncreased = threeMeasurementSumIncreaseCalculator.Calculate(depthMeasurements);
 
             Assert.That(timesIncreased, Is.EqualTo(1));
         }
@@ -38,7 +38,7 @@ namespace Day1.Tests
         {
             var depthMeasurements = new[] { 199, 200, 201, 202, 203 };
 
-            int timesIncreased = depthIncreaseCalculator.Calculate(depthMeasurements);
+            int timesIncreased = threeMeasurementSumIncreaseCalculator.Calculate(depthMeasurements);
 
             Assert.That(timesIncreased, Is.EqualTo(2));
         }
@@ -48,7 +48,7 @@ namespace Day1.Tests
         {
             var depthMeasurements = new[] { 199, 200, 201, 202, 203, 150 };
 
-            int timesIncreased = depthIncreaseCalculator.Calculate(depthMeasurements);
+            int timesIncreased = threeMeasurementSumIncreaseCalculator.Calculate(depthMeasurements);
 
             Assert.That(timesIncreased, Is.EqualTo(2));
         }
@@ -58,7 +58,7 @@ namespace Day1.Tests
         {
             var depthMeasurements = new[] { 199, 200, 201, 202, 3, 500 };
 
-            int timesIncreased = depthIncreaseCalculator.Calculate(depthMeasurements);
+            int timesIncreased = threeMeasurementSumIncreaseCalculator.Calculate(depthMeasurements);
 
             Assert.That(timesIncreased, Is.EqualTo(2));
         }
@@ -68,7 +68,7 @@ namespace Day1.Tests
         {
             var depthMeasurements = new[] { 199, 200, 208, 210, 200, 207, 240, 269, 260, 263 };
 
-            int timesIncreased = depthIncreaseCalculator.Calculate(depthMeasurements);
+            int timesIncreased = threeMeasurementSumIncreaseCalculator.Calculate(depthMeasurements);
 
             Assert.That(timesIncreased, Is.EqualTo(5));
         }

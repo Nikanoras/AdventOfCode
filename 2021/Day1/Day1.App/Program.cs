@@ -2,9 +2,9 @@
 
 var depthMeasurements = File.ReadAllLines("./input.txt").Select(d => int.Parse(d)).ToArray();
 
-var depthIncreaseCalculator = new DepthIncreaseCalculator();
+var oneMeasurementIncreaseCalculator = new SingleMeasurementIncreaseCalculator();
 
-int timesDepthIncreased = depthIncreaseCalculator.CalculateTimesDepthIncreased(depthMeasurements);
+int timesDepthIncreased = oneMeasurementIncreaseCalculator.Calculate(depthMeasurements);
 
 Console.WriteLine($"How many measurements are larger than the previous measurement?");
 Console.WriteLine($"{timesDepthIncreased} measurements are larger than the previous measurement");
