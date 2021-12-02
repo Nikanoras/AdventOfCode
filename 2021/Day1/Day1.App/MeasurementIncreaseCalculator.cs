@@ -15,12 +15,14 @@
             int lastSum = depthMeasurements.Take(numberOfMeasurements).Sum();
             for (int i = 1; i < depthMeasurements.Length; i++)
             {
-                if (depthMeasurements.Skip(i).Take(numberOfMeasurements).Count() != numberOfMeasurements)
+                int[] currentMeasurements = depthMeasurements.Skip(i).Take(numberOfMeasurements).ToArray();
+                
+                if (currentMeasurements.Length != numberOfMeasurements)
                 {
                     return timesIncreased;
                 }
 
-                int currentSum = depthMeasurements.Skip(i).Take(numberOfMeasurements).ToArray().Sum();
+                int currentSum = currentMeasurements.Sum();
 
                 if (currentSum > lastSum)
                 {
