@@ -1,19 +1,15 @@
 ﻿namespace Day2.App
 {
-    public class DifferentTypeOfSteeringSubmarine
+    public class BiDirectionalCourseCalculationStrategy : CourseCalculationStrategy
     {
-        public int Position { get; private set; }
-
-        public void TakeDirections(string[] directions)
+        public override int CalculateFinalPosition(string[] directions)
         {
             int horizontalPosition = 0;
             int depth = 0;
             int aim = 0;
-            foreach (var direction in directions)
+            foreach (string? direction in directions)
             {
-                string[] instructions = direction.Split(" ");
-                int position = int.Parse(instructions[1]);
-                string? command = instructions[0];
+                (var command, var position) = ParseDirection(direction);
                 if (command == "forward")
                 {
                     horizontalPosition += position;
@@ -29,7 +25,7 @@
                 }
 
             }
-            Position = depth * horizontalPosition;
+            return depth * horizontalPosition;
         }
     }
 }

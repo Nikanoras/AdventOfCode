@@ -1,12 +1,12 @@
 ﻿using Day2.App;
-var depthMeasurements = await File.ReadAllLinesAsync("./input.txt");
+string[]? directions = await File.ReadAllLinesAsync("./input.txt");
 
 Console.WriteLine("What do you get if you multiply your final horizontal position by your final depth?");
-var submarine = new Submarine();
-submarine.TakeDirections(depthMeasurements);
-Console.WriteLine($"Answer: {submarine.Position}");
+var oneDirectionCoursePlanner = new SubmarineCoursePlanner(new OneDirectionCourseCalculationStrategy());
+oneDirectionCoursePlanner.CalculateFinalPosition(directions);
+Console.WriteLine($"Answer: {oneDirectionCoursePlanner.Position}");
 
 Console.WriteLine("What do you get if you multiply your final horizontal position by your final depth?");
-var differentSubmarine = new DifferentTypeOfSteeringSubmarine();
-differentSubmarine.TakeDirections(depthMeasurements);
-Console.WriteLine($"Answer: {differentSubmarine.Position}");
+var biDirectionalCoursePlanner = new SubmarineCoursePlanner(new BiDirectionalCourseCalculationStrategy());
+biDirectionalCoursePlanner.CalculateFinalPosition(directions);
+Console.WriteLine($"Answer: {biDirectionalCoursePlanner.Position}");
