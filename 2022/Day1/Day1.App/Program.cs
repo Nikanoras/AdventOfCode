@@ -1,11 +1,11 @@
 ﻿var calories = File.ReadAllLines("./input.txt");
 var eachElfSummedCalories = new SortedSet<int>();
 var currentElfCalorieSum = 0;
-foreach (var calory in calories)
+foreach (var calorie in calories)
 {
-    if (int.TryParse(calory, out int parsedCalory))
+    if (int.TryParse(calorie, out var parsedCalorie))
     {
-        currentElfCalorieSum += parsedCalory;
+        currentElfCalorieSum += parsedCalorie;
     }
     else
     {

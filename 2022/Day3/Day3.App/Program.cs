@@ -1,4 +1,4 @@
-﻿string[] ruckSacks = File.ReadAllLines("input.txt");
+﻿var ruckSacks = File.ReadAllLines("input.txt");
 
 var firstResult = 0;
 foreach (var ruckSackItems in ruckSacks)
@@ -13,7 +13,7 @@ foreach (var ruckSackItems in ruckSacks)
 Console.WriteLine(firstResult);
 
 var secondResult = 0;
-for (int i = 2; i < ruckSacks.Length; i += 3)
+for (var i = 2; i < ruckSacks.Length; i += 3)
 {
     var firstElfRucksack = ruckSacks[i - 2].ToCharArray();
     var secondElfRucksack = ruckSacks[i - 1].ToCharArray();
@@ -24,12 +24,12 @@ for (int i = 2; i < ruckSacks.Length; i += 3)
 }
 Console.WriteLine(secondResult);
 
-static int ConvertCharsToPriorityPoints(List<char> sameChars)
+static int ConvertCharsToPriorityPoints(IEnumerable<char> sameChars)
 {
     return sameChars.Select(c => char.IsUpper(c) ? c - 38 : c - 96).Sum();
 }
 
-static List<char> GetDistinctCharsBetweenArrays(params char[][] charArrays)
+static IEnumerable<char> GetDistinctCharsBetweenArrays(params char[][] charArrays)
 {
     if (!charArrays.Any())
     {

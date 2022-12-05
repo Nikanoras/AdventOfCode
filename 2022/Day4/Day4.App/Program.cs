@@ -1,9 +1,9 @@
-﻿string[] elfPairs = File.ReadAllLines("input.txt");
+﻿var elfPairs = File.ReadAllLines("input.txt");
 var firstCount = 0;
 var secondCount = 0;
 foreach (var elfPair in elfPairs)
 {
-    string[] assignments = elfPair.Split(",");
+    var assignments = elfPair.Split(",");
     var firstElfAssignment = GetAssignmentStartAndEndSectionIds(assignments[0]);
     var secondElfAssignment = GetAssignmentStartAndEndSectionIds(assignments[1]);
 

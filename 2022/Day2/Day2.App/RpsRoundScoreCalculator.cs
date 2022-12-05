@@ -1,7 +1,5 @@
 ﻿abstract class RpsRoundScoreCalculator
 {
-    public abstract int GetMyScore(Shape opponentShape, Shape myShape);
-
     protected static int CalculateScoreByComparingShapes(Shape shape1, Shape shape2)
     {
         return GetShapeTypeComparisonScore(shape1, shape2) + GetShapeScore(shape2);

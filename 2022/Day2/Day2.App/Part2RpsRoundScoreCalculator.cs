@@ -1,24 +1,14 @@
 ﻿class Part2RpsRoundScoreCalculator : RpsRoundScoreCalculator
 {
-    public override int GetMyScore(Shape opponentShape, Shape myShape)
+    public virtual int GetMyScore(Shape opponentShape, Shape myShape)
     {
-        Shape shapeToCompareInstead;
-        if (myShape is Rock)
+        var shapeToCompareInstead = myShape switch
         {
-            shapeToCompareInstead = opponentShape.GetWeakerShape();
-        }
-        else if (myShape is Paper)
-        {
-            shapeToCompareInstead = opponentShape;
-        }
-        else if (myShape is Scissors)
-        {
-            shapeToCompareInstead = opponentShape.GetStrongerShape();
-        }
-        else
-        {
-            throw new ArgumentOutOfRangeException(nameof(myShape), "Invalid shape");
-        }
+            Rock => opponentShape.GetWeakerShape(),
+            Paper => opponentShape,
+            Scissors => opponentShape.GetStrongerShape(),
+            _ => throw new ArgumentOutOfRangeException(nameof(myShape), "Invalid shape")
+        };
 
         return CalculateScoreByComparingShapes(opponentShape, shapeToCompareInstead);
     }

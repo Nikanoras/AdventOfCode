@@ -7,7 +7,7 @@ var part2RoundScoreCalculator = new Part2RpsRoundScoreCalculator();
 
 foreach (var round in inputs)
 {
-    string[] shapes = round.Split();
+    var shapes = round.Split();
     var opponentShape = ParseInputAndReturnShape(shapes[0]);
     var myShape = ParseInputAndReturnShape(shapes[1]);
 
