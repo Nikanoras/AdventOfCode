@@ -25,16 +25,15 @@ foreach (var instruction in unclearInstructions)
         if (char.IsDigit(c))
         {
             firsDigit = c;
+            break;
         }
-        else
+
+        foreach (var number in numbers)
         {
-            foreach (var number in numbers)
+            if (instruction[i..].StartsWith(number.Key))
             {
-                if (instruction[i..].StartsWith(number.Key))
-                {
-                    firsDigit = char.Parse(number.Value);
-                    break;
-                }
+                firsDigit = char.Parse(number.Value);
+                break;
             }
         }
 
@@ -50,17 +49,16 @@ foreach (var instruction in unclearInstructions)
         if (char.IsDigit(c))
         {
             lastDigit = c;
+            break;
         }
-        else
+
+        foreach (var number in numbers)
         {
-            foreach (var number in numbers)
+            var range = new Range(0, i + 1);
+            if (instruction[range].EndsWith(number.Key))
             {
-                var range = new Range(0, i + 1);
-                if (instruction[range].EndsWith(number.Key))
-                {
-                    lastDigit = char.Parse(number.Value);
-                    break;
-                }
+                lastDigit = char.Parse(number.Value);
+                break;
             }
         }
 
