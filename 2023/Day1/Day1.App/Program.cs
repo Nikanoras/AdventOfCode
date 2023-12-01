@@ -1,16 +1,5 @@
 ﻿var unclearInstructions = File.ReadAllLines("./input.txt");
 
-// var unclearInstructions = new[]
-// {
-//     "two1nine",
-//     "eightwothree",
-//     "abcone2threexyz",
-//     "xtwone3four",
-//     "4nineeightseven2",
-//     "zoneight234",
-//     "7pqrstsixteen"
-// };
-
 var result = 0;
 var numbers = new Dictionary<string, string>
 {
@@ -27,32 +16,61 @@ var numbers = new Dictionary<string, string>
 
 foreach (var instruction in unclearInstructions)
 {
-    var digitizedInstruction = instruction;
-
-    for (var i = 0; i < digitizedInstruction.Length; i++)
-    {
-        foreach (var number in numbers)
-        {
-            if (digitizedInstruction[i..].StartsWith(number.Key))
-            {
-                digitizedInstruction = digitizedInstruction.Replace(number.Key, number.Value);
-            }
-        }
-    }
-    
+    var index = 0;
     char? firsDigit = null;
     char? lastDigit = null;
 
-    foreach (var c in digitizedInstruction)
+    var loop = true;
+    while (loop)
     {
-        if (!char.IsDigit(c))
+        var manipulateIndex = true;
+        var c = instruction[index];
+
+        if (char.IsDigit(c) && !firsDigit.HasValue)
         {
+            firsDigit = c;
+            index = instruction.Length - 1;
             continue;
         }
 
-        firsDigit ??= c;
+        if (char.IsDigit(c) && !lastDigit.HasValue)
+        {
+            lastDigit = c;
+            break;
+        }
 
-        lastDigit = c;
+        foreach (var number in numbers)
+        {
+            if (!char.IsDigit(c))
+            {
+                var endIndex = index + 1;
+                if (!firsDigit.HasValue && instruction[index..].StartsWith(number.Key))
+                {
+                    firsDigit = char.Parse(number.Value);
+                    index = instruction.Length - 1;
+                    manipulateIndex = false;
+                    break;
+                }
+                else if (!lastDigit.HasValue && instruction[..endIndex].EndsWith(number.Key))
+                {
+                    lastDigit = char.Parse(number.Value);
+                    loop = false;
+                    break;
+                }
+            }
+        }
+
+        if (manipulateIndex)
+        {
+            if (!firsDigit.HasValue)
+            {
+                index++;
+            }
+            else
+            {
+                index--;
+            }
+        }
     }
 
     var calibrationValue = new string(new[] { firsDigit!.Value, lastDigit!.Value });
