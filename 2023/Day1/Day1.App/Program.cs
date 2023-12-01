@@ -16,60 +16,57 @@ var numbers = new Dictionary<string, string>
 
 foreach (var instruction in unclearInstructions)
 {
-    var index = 0;
     char? firsDigit = null;
     char? lastDigit = null;
 
-    var loop = true;
-    while (loop)
+    for (var i = 0; i < instruction.Length; i++)
     {
-        var manipulateIndex = true;
-        var c = instruction[index];
-
-        if (char.IsDigit(c) && !firsDigit.HasValue)
+        var c = instruction[i];
+        if (char.IsDigit(c))
         {
             firsDigit = c;
-            index = instruction.Length - 1;
-            continue;
         }
-
-        if (char.IsDigit(c) && !lastDigit.HasValue)
+        else
         {
-            lastDigit = c;
-            break;
-        }
-
-        foreach (var number in numbers)
-        {
-            if (!char.IsDigit(c))
+            foreach (var number in numbers)
             {
-                var endIndex = index + 1;
-                if (!firsDigit.HasValue && instruction[index..].StartsWith(number.Key))
+                if (instruction[i..].StartsWith(number.Key))
                 {
                     firsDigit = char.Parse(number.Value);
-                    index = instruction.Length - 1;
-                    manipulateIndex = false;
-                    break;
-                }
-                else if (!lastDigit.HasValue && instruction[..endIndex].EndsWith(number.Key))
-                {
-                    lastDigit = char.Parse(number.Value);
-                    loop = false;
                     break;
                 }
             }
         }
 
-        if (manipulateIndex)
+        if (firsDigit.HasValue)
         {
-            if (!firsDigit.HasValue)
+            break;
+        }
+    }
+
+    for (var i = instruction.Length - 1; i >= 0; i--)
+    {
+        var c = instruction[i];
+        if (char.IsDigit(c))
+        {
+            lastDigit = c;
+        }
+        else
+        {
+            foreach (var number in numbers)
             {
-                index++;
+                var range = new Range(0, i + 1);
+                if (instruction[range].EndsWith(number.Key))
+                {
+                    lastDigit = char.Parse(number.Value);
+                    break;
+                }
             }
-            else
-            {
-                index--;
-            }
+        }
+
+        if (lastDigit.HasValue)
+        {
+            break;
         }
     }
 
